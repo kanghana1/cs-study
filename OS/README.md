@@ -1,31 +1,18 @@
-# 🔔 운영체제 공부
+# 운영체제 공부
 
-## 🎯 Study Goal
+## OVERALL
 
-- 운영체제를 **암기 과목이 아닌, 시스템 이해 도구로 학습**
-- 백엔드 개발 관점에서 **동시성, 메모리, 성능 문제 해결 능력 확보**
-- 기술 면접에서 **깊이 있는 답변 가능 수준까지 이해**
 
----
-
-## 🧠 Overall Structure
-
-운영체제는 아래 4가지 관점으로 이해한다:
-
-- **Process** → 실행 (CPU 관점)
-- **Memory** → 공간 (RAM 관점)
-- **File & I/O** → 데이터 (디스크 / 네트워크)
-- **System** → 운영체제 내부 구조
+- **Process** 
+- **Memory**
+- **File & I/O**
+- **System**
 
 <br>
 
-## 🚀 Study Roadmap (중요도 순)
+## THEME
 
-<br>
-
-### 1️⃣ Process & Thread (⭐⭐⭐⭐⭐)
-
-> 동시성의 시작, 백엔드 핵심
+### Process & Thread (⭐⭐⭐⭐⭐)
 
 - Process vs Thread
 - PCB (Process Control Block)
@@ -36,9 +23,7 @@
 
 ---
 
-### 2️⃣ Synchronization (⭐⭐⭐⭐⭐)
-
-> 동시성 문제 해결 능력
+### Synchronization (⭐⭐⭐⭐⭐)
 
 - Race Condition
 - Critical Section
@@ -48,9 +33,7 @@
 
 ---
 
-### 3️⃣ Memory Management (⭐⭐⭐⭐⭐)
-
-> 성능과 안정성의 핵심
+### Memory Management (⭐⭐⭐⭐⭐)
 
 - Virtual Memory
 - Paging / Segmentation
@@ -59,9 +42,7 @@
 
 ---
 
-### 4️⃣ System Call & Kernel (⭐⭐⭐⭐⭐)
-
-> OS와 프로그램의 연결
+### System Call & Kernel (⭐⭐⭐⭐⭐)
 
 - System Call
 - User Mode vs Kernel Mode
@@ -70,9 +51,7 @@
 
 ---
 
-### 5️⃣ File System & I/O (⭐⭐⭐⭐)
-
-> 데이터 저장과 입출력
+### File System & I/O (⭐⭐⭐⭐)
 
 - File System Structure
 - Disk Scheduling
@@ -80,9 +59,7 @@
 
 ---
 
-### 6️⃣ OS Structure (⭐⭐⭐⭐)
-
-> 운영체제 설계 방식
+### OS Structure (⭐⭐⭐⭐)
 
 - Monolithic
 - Microkernel
@@ -92,9 +69,7 @@
 
 ---
 
-### 7️⃣ Booting & Linking (⭐⭐⭐⭐)
-
-> 프로그램 실행 흐름 이해
+### Booting & Linking (⭐⭐⭐⭐)
 
 - Booting Process (BIOS / UEFI)
 - Linker & Loader
@@ -102,18 +77,16 @@
 
 ---
 
-### 8️⃣ Deadlock (⭐⭐⭐⭐⭐)
-
-> 면접 단골 + 동시성 핵심
+### Deadlock (⭐⭐⭐⭐⭐)
 
 - Deadlock 조건 (4가지)
 - Prevention / Avoidance / Detection / Recovery
 
 ---
 
-### 9️⃣ Performance & Monitoring (⭐⭐⭐)
+### Performance & Monitoring (⭐⭐⭐)
 
-> 실무 성능 분석
+> 성능 분석
 
 - CPU / Memory Monitoring
 - Profiling
