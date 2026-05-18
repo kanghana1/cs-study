@@ -294,7 +294,7 @@ signal(rw_mutex)→ 잠금 해제
 
 <br>
 
-### **2. 식사하는 철학자 문제 (Dining Philosophers Problem)**
+### **3. 식사하는 철학자 문제 (Dining Philosophers Problem)**
 
 이 문제도 유명한 문제이다. 원형 테이블에 앉은 철학자들 사이마다 젓가락 1개씩 (총 5개) 가 있다.
 
