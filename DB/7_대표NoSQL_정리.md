@@ -222,8 +222,3 @@ MongoDB의 일반적인 인덱스는 B-tree 계열 구조를 사용하며, 복�
 ```
 db.users.createIndex({ email: 1 })
 ```
-
-<br>
-
-#### **MongoDB의 트랜잭션과 일관성**
-
