@@ -222,3 +222,107 @@ MongoDB의 일반적인 인덱스는 B-tree 계열 구조를 사용하며, 복�
 ```
 db.users.createIndex({ email: 1 })
 ```
+
+<br>
+
+#### **MongoDB의 트랜잭션과 일관성**
+
+NoSQL은 트랜잭션을 지원하지 않는다는 오해가 많지만, 사실 트랜잭션을 지원한다.
+
+MongoDB는 4.0 버전부터 **다중 문서 트랜잭션**을 지원한다. 단일 문서에 대한 작업은 원자적이지만, **여러 문서에 걸친 작업은 트랜잭션을 통해 처리**할 수 있다. 다만 여러 문서를 함께 수정하는 트랜잭션은 추가적인 비용이 발생할 수 있어 **모델링 단계에서 데이터를 적절히 배치**하는 게 좋다.
+
+추가로 MongoDB는 **Replica Set과 Sharding**을 통해 **고가용성과 수평확장**을 지원한다.
+
+<br>
+
+### **3. Cassandra > Wide-Column NoSQL**
+
+#### **Cassandra란?**
+
+Apache Cassandra는 여러 서버에 데이터를 분산 저장하도록 설계된 NoSQL 데이터베이스이다.
+
+특히 대규모 데이터와 **높은 쓰기처리량**, 여러 노드에 걸친 **고가용성이 중요한 시스템**에서 주로 사용한다. 사용 예시는 다음과 같다.
+
+- **IoT 데이터 수집**: 센서 데이터, 로그 데이터 등
+- **대규모 이벤트 로그**
+- **사용자 활동 기록**
+- **시계열 데이터**
+
+<br>
+
+#### **Cassandra의 분산 구조**
+
+![alt text](image.png)
+
+Cassandra는 기본적으로 단일 마스터가 모든 쓰기를 관리하지 않고 **Peer-to-Peer 구조**를 사용한다. 데이터는 Partition Key를 기반으로 분산되며, Replication Factor 설정에 따라 여러 노드에 복제될 수 있다.
+
+#### **Partition Key와 Clustering Column**
+
+Cassandra에서 데이터를 저장할 때, **Partition Key**와 **Clustering Column**을 사용하여 데이터를 분류하고 정렬한다.
+
+```SQL
+CREATE TABLE user_events (
+    user_id UUID,
+    event_time TIMESTAMP,
+    event_type TEXT,
+    PRIMARY KEY (user_id, event_time)
+);
+```
+
+- userId : **Partition Key**
+- eventTime : **Clustering Column**
+
+**Partition Key**는 데이터가 **어떤 파티션에 속하는지**를 결정하고, **Clustering Column**은 파티션 내부에서 **데이터의 정렬 순서**에 영향을 준다.
+
+Cassandra는 임의의 컬럼을 자유롭게 조회하기 보다는 **미리 정해진 조회 패턴에 맞춰 테이블을 설계**하는 게 중요하다.
+
+#### **Cassandra의 일관성**
+
+Cassandra는 **읽기와 쓰기에 대해 Consistency Level을 설정**할 수 있다.
+
+![alt text](image-1.png)
+
+일반적으로 일관성 요구 수준을 높이면 **더 많은 복제본의 응답이 필요해져 가용성과 지연 시간에 영향**을 줄 수 있다.
+
+복제본 수가 N일 때 읽기 요구 수 R, 쓰기 요구 수 W가 **R + W > N**을 만족하도록 설정하면 **정상적인 복제본 중첩을 확보**할 수 있지만, 이것만으로 모든 장애 상황에서 강한 일관성이 보장되진 않는다.
+
+<br>
+
+### **4. Neo4j > Graph-NoSQL**
+
+#### **Graph Database란?**
+
+Graph Database는 **노드(Node)와 관계(Relationship)**를 중심으로 데이터를 저장하는 데이터베이스이다.
+
+예를 들면 SNS에서 사용자의 팔로우 관계를 저장하는 것을 생각해볼 수 있다.
+
+![alt text](image-2.png)
+
+Neo4j에서는 다음과 같은 Cypher 쿼리를 사용할 수 있다.
+
+```cypher
+// hana가 팔로우하는 사용자를 찾는 쿼리
+MATCH (a:User {name: "Hana"})-[:FOLLOWS]->(b:User)
+RETURN b
+```
+
+#### **RDB와 Graph DB의 차이는?**
+
+RDB에서는 친구의 친구를 조회하려면 자기 참조 JOIN을 여러번 수행할 수 있다.
+
+```SQL
+SELECT f2.followee_id
+FROM follows f1
+JOIN follows f2
+  ON f1.followee_id = f2.follower_id
+WHERE f1.follower_id = 1;
+```
+
+Graph DB에서는 관계를 따라 탐색하는 방식으로 구현할 수 있다.
+
+```
+MATCH (a:User {id: 1})-[:FOLLOWS]->()-[:FOLLOWS]->(b:User)
+RETURN b
+```
+
+관계의 깊이가 증가하거나 복잡한 연결 패턴을 탐색해야 할 때 Graph DB가 유리할 수 있으나, 단순한 관계 조회는 RDB로 충분하다.
